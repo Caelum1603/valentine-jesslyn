@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For My Valentine 💖</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Comic Sans MS','Poppins',cursive;
+  background:linear-gradient(180deg,#ffe6f0,#fff);
+  overflow-x:hidden;
+}
+
+.page{
+  display:none;
+  min-height:100vh;
+  width:100vw;
+  padding:20px;
+  box-sizing:border-box;
+  text-align:center;
+}
+
+.page.active{display:block;}
+h1{color:#ff5c8a;}
+
+button{
+  background:#ff7aa2;
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+}
+button:hover{background:#ff5c8a;}
+
+.sticker{width:100px;margin:10px auto;}
+
+/* GALLERY */
+.gallery-wrapper{
+  max-height:60vh;
+  overflow-y:auto;
+  padding:10px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:15px;
+}
+
+.gallery-wrapper::-webkit-scrollbar{
+  width:6px;
+}
+.gallery-wrapper::-webkit-scrollbar-thumb{
+  background:pink;
+  border-radius:10px;
+}
+
+/* MAIL */
+.mail{
+  width:260px;
+  height:180px;
+  margin:20px auto;
+  position:relative;
+  cursor:pointer;
+}
+
+.heart-seal{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#ff5c8a;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  transition:0.4s;
+  z-index:5;
+}
+
+.mail.open .heart-seal{
+  opacity:0;
+  transform:translateX(-50%) scale(0);
+}
+
+.envelope{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#ffd1dc;
+  border-radius:10px;
+}
+
+.letter{
+  position:absolute;
+  bottom:0;
+  width:90%;
+  left:5%;
+  height:0;
+  background:white;
+  border-radius:8px;
+  overflow:hidden;
+  transition:0.5s;
+  padding:0 10px;
+}
+
+.mail.open .letter{
+  height:200px;
+  padding:15px 10px;
+}
+
+.letter-content{
+  max-height:160px;
+  overflow-y:auto;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* HEART FLOAT */
+.heart{
+  position:fixed;
+  color:pink;
+  animation:float 4s linear infinite;
+  font-size:20px;
+}
+
+@keyframes float{
+  from{transform:translateY(100vh);opacity:1;}
+  to{transform:translateY(-10vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Haloo Jesslyn 💕</h1>
+  <img class="sticker" src="https://media.giphy.com/media/KztT2c4u8mYYUiMKdJ/giphy.gif" />
+  <p>I made this just for you 🥰</p>
+  <button onclick="next(2)">Next ➜</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>Our Memories 📸</h1>
+
+  <div class="gallery-wrapper">
+    <div class="gallery">
+      <img src="images/image1.jpeg">
+      <img src="images/image2.jpeg">
+      <img src="images/image3.jpeg">
+      <img src="images/image4.jpeg">
+      <img src="images/image5.jpeg">
+      <img src="images/image6.jpeg">
+      <img src="images/image7.jpeg">
+      <img src="images/image8.jpeg">
+      <img src="images/image9.jpeg">
+    </div>
+  </div>
+
+  <button onclick="next(3)">Next ➜</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h1>Our Song 🎵</h1>
+  <audio controls loop>
+    <source src="oursong.mp3.mp3" type="audio/mpeg">
+  </audio>
+  <br>
+  <button onclick="next(4)">Next ➜</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+  <h1>Do you want to open my letter? 💌</h1>
+  <img class="sticker" src="https://media.giphy.com/media/Tga4sDdqQGONpPeNsS/giphy.gif" />
+  <button onclick="next(5)">Yes 💖</button>
+  <button onclick="next(6)">No 😢</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <h1>For Jesslyn 💕</h1>
+  <p style="color:#ff5c8a">(klik amplopnya 💌)</p>
+
+  <div class="mail" onclick="openMail()">
+    <div class="envelope"></div>
+    <div class="heart-seal">❤</div>
+    <div class="letter">
+      <div class="letter-content">
+        Happy Valentine jejee 💖<br><br>
+        ...<br><br>
+          Ga kerasa yahh udah setahun lebih kita sama-sama, masih ga nyangka bisa sedeket ini sama kau
+    yang awalnya kita cuma sekedar liat wajah satu sama lain dan tidak saling menyapa,
+    dan sekarang bisa chat tiap hari, kabarin satu sama lain, jalan-jalan bersama,
+    having fun together, maaf yaa kalo kadang saya nyebelin, suka kasi pertanyaan yg nda jelas
+    kek ko pergi sama siapa, terlalu posesif? saya emang gitu orangnya tapi saya bakal berubah
+    biar ko nda ngerasa nda nyaman karna saya selalu cemburu, kadang marah kalo ko begadang terlalu malam
+    semoga dengan tahun yang baru ini, dan valentine pertama yang kita rayakan bersama bisa membuat kita
+    jadi lebih baik untuk satu sama lain yaaaaa. Semoga kita bisa lakukan hal-hal yang menyenangkan lagi kedepannya
+    doing my first time with u like painting? se nda pernah pi melukis, or mayne holding hands for the first time in my life? idk
+    yang saya mau itu cuma spending all my time with you, semoga ko nda bosan sama saya yahh:(. alright thats it udah panjang bgt ini.
+    babayy, lanjut di wa aja HAHAHAHA semogaa sukaa ya ini websitee, agak alay sie tapi yaudin udah lama juga urat malu ku putus kalo sama kau xixixi
+     ditunggu coklatnyaa kalo ada HAHAHAHA. 
+    And last thing, hopefully we can built our relationship soon ❤️<br/>
+    I love you, always 💕
+    Once again... Happy Valentine Jesslyn💖
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+  <h1>Pleaseee 🥺</h1>
+  <img class="sticker" src="https://media.giphy.com/media/dI53rvCkTsyJWFA3Fc/giphy.gif" />
+  <p>Ayolah buka dongg 😭💔</p>
+  <button onclick="next(4)">Back</button>
+</div>
+
+<script>
+function next(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+function openMail(){
+  document.querySelector('.mail').classList.toggle('open');
+  for(let i=0;i<10;i++){
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='❤';
+    h.style.left=Math.random()*100+'vw';
+    h.style.animationDuration=(2+Math.random()*3)+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+</script>
+
+</body>
+</html>
