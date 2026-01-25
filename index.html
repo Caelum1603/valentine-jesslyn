@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
 <title>For My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:'Comic Sans MS','Poppins',cursive;
-  background:linear-gradient(180deg,#ffe6f0,#fff);
+  background:linear-gradient(#ffe6f0,#fff);
   overflow-x:hidden;
 }
 
+/* PAGE SYSTEM */
 .page{
   display:none;
   min-height:100vh;
-  width:100vw;
   padding:20px;
-  box-sizing:border-box;
   text-align:center;
 }
-
 .page.active{display:block;}
+
 h1{color:#ff5c8a;}
 
 button{
   background:#ff7aa2;
   border:none;
-  padding:10px 20px;
-  border-radius:20px;
+  padding:12px 24px;
+  border-radius:25px;
   color:white;
   font-size:16px;
   cursor:pointer;
@@ -37,110 +37,92 @@ button{
 }
 button:hover{background:#ff5c8a;}
 
-.sticker{width:100px;margin:10px auto;}
+.sticker{
+  width:120px;
+  margin:15px auto;
+}
 
 /* GALLERY */
 .gallery-wrapper{
-  max-height:60vh;
+  max-height:65vh;
   overflow-y:auto;
   padding:10px;
 }
-
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:12px;
 }
-
 .gallery img{
   width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
   border-radius:15px;
+  box-shadow:0 4px 10px rgba(255,92,138,.3);
 }
 
-.gallery-wrapper::-webkit-scrollbar{
-  width:6px;
-}
-.gallery-wrapper::-webkit-scrollbar-thumb{
-  background:pink;
-  border-radius:10px;
+/* LETTER */
+.mail-box{
+  max-width:420px;
+  margin:20px auto;
+  background:#fff;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 8px 25px rgba(255,92,138,.3);
 }
 
-/* MAIL */
-.mail{
+.mail-title{
+  font-size:22px;
+  color:#ff5c8a;
+  margin-bottom:10px;
+}
+
+.mail-content{
+  max-height:300px;
+  overflow-y:auto;
+  text-align:left;
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* ENVELOPE */
+.envelope{
   width:260px;
   height:180px;
   margin:20px auto;
+  background:#ffd1dc;
+  border-radius:15px;
   position:relative;
   cursor:pointer;
 }
-
-.heart-seal{
+.seal{
   position:absolute;
   bottom:20px;
   left:50%;
   transform:translateX(-50%);
-  background:#ff5c8a;
-  color:white;
   width:40px;
   height:40px;
+  background:#ff5c8a;
+  color:white;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:18px;
-  transition:0.4s;
-  z-index:5;
-}
-
-.mail.open .heart-seal{
-  opacity:0;
-  transform:translateX(-50%) scale(0);
-}
-
-.envelope{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#ffd1dc;
-  border-radius:10px;
-}
-
-.letter{
-  position:absolute;
-  bottom:0;
-  width:90%;
-  left:5%;
-  height:0;
-  background:white;
-  border-radius:8px;
-  overflow:hidden;
-  transition:0.5s;
-  padding:0 10px;
-}
-
-.mail.open .letter{
-  height:200px;
-  padding:15px 10px;
-}
-
-.letter-content{
-  max-height:160px;
-  overflow-y:auto;
-  font-size:14px;
-  line-height:1.6;
 }
 
 /* HEART FLOAT */
 .heart{
   position:fixed;
-  color:pink;
-  animation:float 4s linear infinite;
+  bottom:-10px;
   font-size:20px;
+  animation:float 4s linear forwards;
 }
-
 @keyframes float{
-  from{transform:translateY(100vh);opacity:1;}
-  to{transform:translateY(-10vh);opacity:0;}
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -149,16 +131,16 @@ button:hover{background:#ff5c8a;}
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <h1>Haloo Jesslyn 💕</h1>
-  <img class="sticker" src="https://media.giphy.com/media/KztT2c4u8mYYUiMKdJ/giphy.gif" />
-  <p>I made this just for you 🥰</p>
-  <button onclick="next(2)">Next ➜</button>
+  <h1>Haloo Jesslynn 💕</h1>
+  <img class="sticker" src="https://media1.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZXoycW50MXRqYTlyaHhtMzg4eXRid3RydmI5ZnEzYmFzaXozM2VjeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xOvhMKk3EyS1LKQtkK/giphy.webp">
+  <p>I made this only for you 🥰</p>
+  <button onclick="go(2)">Next ➜</button>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 GALLERY -->
 <div class="page" id="p2">
-  <h1>Our Memories 📸</h1>
-
+  <h1>Our Memories together 📸</h1>
+  <img class="sticker" src="https://media3.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ZXoycW50MXRqYTlyaHhtMzg4eXRid3RydmI5ZnEzYmFzaXozM2VjeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/yc2pHdAoxVOrJ2m5Ha/200.webp">
   <div class="gallery-wrapper">
     <div class="gallery">
       <img src="images/image1.jpeg">
@@ -172,41 +154,41 @@ button:hover{background:#ff5c8a;}
       <img src="images/image9.jpeg">
     </div>
   </div>
-
-  <button onclick="next(3)">Next ➜</button>
+  <button onclick="go(3)">Next ➜</button>
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3 SONG -->
 <div class="page" id="p3">
-  <h1>Our Song 🎵</h1>
+  <h1>My song for you 🎵</h1>
+  <img class="sticker" src="data:image/png;base64,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">
   <audio controls loop>
     <source src="oursong.mp3.mp3" type="audio/mpeg">
   </audio>
   <br>
-  <button onclick="next(4)">Next ➜</button>
+  <button onclick="go(4)">Next ➜</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4 ASK -->
 <div class="page" id="p4">
-  <h1>Do you want to open my letter? 💌</h1>
-  <img class="sticker" src="https://media.giphy.com/media/Tga4sDdqQGONpPeNsS/giphy.gif" />
-  <button onclick="next(5)">Yes 💖</button>
-  <button onclick="next(6)">No 😢</button>
+  <h1>Bukaa dongg surat ku hehe 💌</h1>
+  <img class="sticker" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWtuNXdwOG16bDEyNHh0dzJ5c290eTNzZXhqZ2s2bGdrOXU2cndpNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/zZbf6UpZslp3nvFjIR/giphy.webp">
+  <button onclick="go(5)">Yes 💖</button>
+  <button onclick="go(6)">No 😢</button>
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 5 LETTER -->
 <div class="page" id="p5">
-  <h1>For Jesslyn 💕</h1>
-  <p style="color:#ff5c8a">(klik amplopnya 💌)</p>
+  <h1>A Message For You 💗</h1>
 
-  <div class="mail" onclick="openMail()">
-    <div class="envelope"></div>
-    <div class="heart-seal">❤</div>
-    <div class="letter">
-      <div class="letter-content">
-        Happy Valentine jejee 💖<br><br>
-        ...<br><br>
-          Ga kerasa yahh udah setahun lebih kita sama-sama, masih ga nyangka bisa sedeket ini sama kau
+  <div class="envelope" onclick="openLetter()">
+    <div class="seal">❤</div>
+  </div>
+
+  <div class="mail-box" id="letter" style="display:none;">
+    <div class="mail-title">Hello Jesslyn💕</div>
+    <div class="mail-content">
+      Happy Valentine’s Day Jesslynnn 💖<br><br>
+       Ga kerasa yahh udah setahun lebih kita sama-sama, masih ga nyangka bisa sedeket ini sama kau
     yang awalnya kita cuma sekedar liat wajah satu sama lain dan tidak saling menyapa,
     dan sekarang bisa chat tiap hari, kabarin satu sama lain, jalan-jalan bersama,
     having fun together, maaf yaa kalo kadang saya nyebelin, suka kasi pertanyaan yg nda jelas
@@ -214,40 +196,42 @@ button:hover{background:#ff5c8a;}
     biar ko nda ngerasa nda nyaman karna saya selalu cemburu, kadang marah kalo ko begadang terlalu malam
     semoga dengan tahun yang baru ini, dan valentine pertama yang kita rayakan bersama bisa membuat kita
     jadi lebih baik untuk satu sama lain yaaaaa. Semoga kita bisa lakukan hal-hal yang menyenangkan lagi kedepannya
-    doing my first time with u like painting? se nda pernah pi melukis, or mayne holding hands for the first time in my life? idk
+    doing my first time with u like painting? se nda pernah pi melukis, or maybe holding hands for the first time in my life? idk
     yang saya mau itu cuma spending all my time with you, semoga ko nda bosan sama saya yahh:(. alright thats it udah panjang bgt ini.
     babayy, lanjut di wa aja HAHAHAHA semogaa sukaa ya ini websitee, agak alay sie tapi yaudin udah lama juga urat malu ku putus kalo sama kau xixixi
      ditunggu coklatnyaa kalo ada HAHAHAHA. 
     And last thing, hopefully we can built our relationship soon ❤️<br/>
     I love you, always 💕
-    Once again... Happy Valentine Jesslyn💖
-      </div>
+    Once again... Happy Valentine Jesslyn💖<br><br>
+
+      I love you so much 💕💖💗
     </div>
   </div>
+
+  <button onclick="go(1)">Start Over ♡</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 6 NO -->
 <div class="page" id="p6">
   <h1>Pleaseee 🥺</h1>
-  <img class="sticker" src="https://media.giphy.com/media/dI53rvCkTsyJWFA3Fc/giphy.gif" />
-  <p>Ayolah buka dongg 😭💔</p>
-  <button onclick="next(4)">Back</button>
+  <img class="sticker" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNWtuNXdwOG16bDEyNHh0dzJ5c290eTNzZXhqZ2s2bGdrOXU2cndpNiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/K6WIhJ07gwGkIAQfwN/giphy.webp">
+  <p>Ihh masa gamauuu, ulang ceped 😭💔</p>
+  <button onclick="go(4)">Back</button>
 </div>
 
 <script>
-function next(n){
+function go(n){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('p'+n).classList.add('active');
 }
 
-function openMail(){
-  document.querySelector('.mail').classList.toggle('open');
-  for(let i=0;i<10;i++){
+function openLetter(){
+  document.getElementById('letter').style.display='block';
+  for(let i=0;i<15;i++){
     let h=document.createElement('div');
     h.className='heart';
     h.innerHTML='❤';
     h.style.left=Math.random()*100+'vw';
-    h.style.animationDuration=(2+Math.random()*3)+'s';
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),4000);
   }
