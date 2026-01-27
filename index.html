@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Comic Sans MS','Poppins',cursive;
+  background:linear-gradient(#ffe6f0,#fff);
+  overflow-x:hidden;
+}
+
+/* PAGE SYSTEM */
+.page{
+  display:none;
+  min-height:100vh;
+  padding:20px;
+  text-align:center;
+
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.page.active{
+  display:flex;
+}
+
+
+.page > * {
+  margin: 10px 0;
+}
+
+button{
+  position:relative;
+  z-index:5;
+}
+
+.heart{
+  pointer-events:none;
+}
+
+
+h1{
+  margin-top:-20px;
+}
+
+h1{color:#ff5c8a;}
+
+button{
+  background:#ff7aa2;
+  border:none;
+  padding:12px 24px;
+  border-radius:25px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+}
+button:hover{background:#ff5c8a;}
+
+.sticker{
+  width:120px;
+  margin:15px auto;
+}
+
+/* GALLERY */
+.gallery-wrapper{
+  max-height:65vh;
+  overflow-y:auto;
+  padding:10px;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.gallery img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(255,92,138,.3);
+}
+
+/* LETTER */
+.mail-box{
+  max-width:420px;
+  margin:20px auto;
+  background:#fff;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 8px 25px rgba(255,92,138,.3);
+}
+
+.mail-title{
+  font-size:22px;
+  color:#ff5c8a;
+  margin-bottom:10px;
+}
+
+.mail-content{
+  max-height:300px;
+  overflow-y:auto;
+  text-align:left;
+  font-size:15px;
+  line-height:1.7;
+  white-space:pre-line;
+}
+
+/* ENVELOPE */
+.envelope{
+  width:260px;
+  height:180px;
+  margin:20px auto;
+  background:#ffd1dc;
+  border-radius:15px;
+  position:relative;
+  cursor:pointer;
+}
+.seal{
+  position:absolute;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:40px;
+  height:40px;
+  background:#ff5c8a;
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* HEART FLOAT */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  font-size:20px;
+  animation:float 4s linear forwards;
+}
+/* ===== PINK SCROLLBAR (TARGET SPESIFIK) ===== */
+
+/* GALLERY SCROLL */
+.gallery-wrapper::-webkit-scrollbar,
+.mail-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gallery-wrapper::-webkit-scrollbar-track,
+.mail-content::-webkit-scrollbar-track {
+  background: #ffe6f0;
+  border-radius: 10px;
+}
+
+.gallery-wrapper::-webkit-scrollbar-thumb,
+.mail-content::-webkit-scrollbar-thumb {
+  background: #ff7aa2;
+  border-radius: 10px;
+}
+
+.gallery-wrapper::-webkit-scrollbar-thumb:hover,
+.mail-content::-webkit-scrollbar-thumb:hover {
+  background: #ff5c8a;
+}
+
+/* Firefox fallback */
+.gallery-wrapper,
+.mail-content {
+  scrollbar-width: thin;
+  scrollbar-color: #ff7aa2 #ffe6f0;
+}
+@keyframes float{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Haloo Jesslynn 💕</h1>
+  <img class="sticker" src="https://media1.giphy.com/media/xOvhMKk3EyS1LKQtkK/giphy.webp">
+  <p>I made this only for you 🥰</p>
+  <button onclick="go(2)">Next ➜</button>
+</div>
+
+<!-- PAGE 2 GALLERY -->
+<div class="page" id="p2">
+  <h1>Our Memories together 📸</h1>
+  <img class="sticker" src="https://media3.giphy.com/media/yc2pHdAoxVOrJ2m5Ha/200.webp">
+  <div class="gallery-wrapper">
+    <div class="gallery">
+      <img src="images/family.jpg">
+      <img src="images/image2.jpeg">
+      <img src="images/image3.jpeg">
+      <img src="images/image4.jpeg">
+      <img src="images/image5.jpeg">
+      <img src="images/image6.jpeg">
+      <img src="images/image7.jpeg">
+      <img src="images/image8.jpg">
+      <img src="images/image9.jpeg">
+    </div>
+  </div>
+  <button onclick="go(3)">Next ➜</button>
+</div>
+
+<!-- PAGE 3 SONG -->
+<div class="page" id="p3">
+  <h1>My song for you 🎵</h1>
+  <audio controls loop>
+    <source src="oursong.mp3.mp3" type="audio/mpeg">
+  </audio>
+  <br>
+  <a href="ourstory.html">
+  <button>Next ➜</button>
+</a>
+
+</div>
+
+<!-- PAGE 4 ASK -->
+<div class="page" id="p4">
+  <h1>Bukaa dongg surat ku hehe 💌</h1>
+  <img class="sticker" src="https://media0.giphy.com/media/zZbf6UpZslp3nvFjIR/giphy.webp">
+  <button onclick="go(5)">Yes 💖</button>
+  <button onclick="go(6)">No 😢</button>
+</div>
+
+<!-- PAGE 5 LETTER -->
+<div class="page" id="p5">
+  <h1>A Message For You 💗</h1>
+
+  <div class="envelope" onclick="openLetter()">
+    <div class="seal">❤</div>
+  </div>
+
+  <div class="mail-box" id="letter" style="display:none;">
+    <div class="mail-title">Hello Jesslyn💕</div>
+    <div class="mail-content" id="typedText"></div>
+  </div>
+
+  <button onclick="go(1)">Start Over ♡</button>
+</div>
+
+<!-- PAGE 6 NO -->
+<div class="page" id="p6">
+  <h1>Pleaseee 🥺</h1>
+  <img class="sticker" src="https://media3.giphy.com/media/K6WIhJ07gwGkIAQfwN/giphy.webp">
+  <p>Ihh masa gamauuu, ulang ceped 😭💔</p>
+  <button onclick="go(4)">Back</button>
+</div>
+
+<script>
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+const letterText = `Happy Valentine’s Day Jesslynnn 💖
+
+ Ga kerasa yahh udah setahun lebih kita sama-sama, masih ga nyangka bisa sedeket ini sama kau
+    yang awalnya kita cuma sekedar liat wajah satu sama lain dan tidak saling menyapa,
+    dan sekarang bisa chat tiap hari, kabarin satu sama lain, jalan-jalan bersama,
+    having fun together, maaf yaa kalo kadang saya nyebelin, suka kasi pertanyaan yg nda jelas
+    kek ko pergi sama siapa, terlalu posesif? saya emang gitu orangnya tapi saya bakal berubah
+    biar ko nda ngerasa nda nyaman karna saya selalu cemburu, kadang marah kalo ko begadang terlalu malam
+    semoga dengan tahun yang baru ini, dan valentine pertama yang kita rayakan bersama bisa membuat kita
+    jadi lebih baik untuk satu sama lain yaaaaa. Semoga kita bisa lakukan hal-hal yang menyenangkan lagi kedepannya
+    doing my first time with u like painting? se nda pernah pi melukis, or maybe holding hands for the first time in my life? idk
+    yang saya mau itu cuma spending all my time with you, semoga ko nda bosan sama saya yahh:(. alright thats it udah panjang bgt ini.
+    babayy, lanjut di wa aja HAHAHAHA semogaa sukaa ya ini websitee, agak alay sie tapi yaudin udah lama juga urat malu ku putus kalo sama kau xixixi
+     ditunggu coklatnyaa kalo ada HAHAHAHA. 
+    And last thing, hopefully we can built our relationship soon ❤️
+    I love you, always 💕
+    Once again... Happy Valentine Jesslyn💖`;
+
+let i = 0;
+
+function typeWriter(){
+  if(i < letterText.length){
+    document.getElementById("typedText").innerHTML += letterText.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  }
+}
+
+function openLetter(){
+  document.getElementById('letter').style.display='block';
+  if(i === 0) typeWriter();
+
+  for(let j=0;j<15;j++){
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='❤';
+    h.style.left=Math.random()*100+'vw';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+}
+
+
+function go(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+}
+
+/* AUTO OPEN PAGE DARI URL */
+const params = new URLSearchParams(window.location.search);
+const page = params.get("page");
+if(page){
+  go(page);
+}
+</script>
+
+
+</body>
+</html>
