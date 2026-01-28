@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Comic Sans MS','Poppins',cursive;
+  overflow:hidden;
+  height:100vh;
+  background:linear-gradient(-45deg,#ffd1dc,#ffe6f0,#ffc0cb,#fff);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* PAGE */
+.page{
+  width:100%;
+  height:100%;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  position:absolute;
+  top:0; left:0;
+}
+
+.page.active{
+  display:flex;
+}
+
+h1{
+  color:#ff5c8a;
+  font-size:40px;
+  margin:10px 0;
+}
+
+p{
+  font-size:18px;
+  color:#555;
+}
+
+/* typing */
+.typing{
+  font-size:16px;
+  color:#ff7aa2;
+  margin-bottom:15px;
+  animation:blink 1.5s infinite;
+}
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:.4}
+}
+
+/* changing text */
+#changingText{
+  font-size:20px;
+  margin:15px 0;
+  color:#ff5c8a;
+  min-height:28px;
+}
+
+/* gif */
+.gif{
+  width:240px;
+  margin:15px 0;
+}
+
+/* buttons */
+button{
+  border:none;
+  padding:15px 30px;
+  border-radius:40px;
+  font-size:18px;
+  cursor:pointer;
+  transition:.35s ease;
+  font-family:'Comic Sans MS','Poppins',cursive;
+  box-shadow:0 8px 20px rgba(255,92,138,.35);
+}
+
+/* YES BUTTON */
+#yesBtn{
+  background:linear-gradient(135deg,#ff9ab8,#ff5c8a);
+  color:white;
+}
+
+/* NO BUTTON (STILL PINK BUT SOFT) */
+#noBtn{
+  background:#ffe0ea;
+  color:#ff5c8a;
+}
+
+/* BACK TO START BUTTON */
+#backBtn{
+  background:linear-gradient(135deg,#ffd1dc,#ff7aa2);
+  color:white;
+  margin-top:25px;
+  font-size:17px;
+  padding:14px 26px;
+  border-radius:35px;
+  box-shadow:0 6px 18px rgba(255,92,138,.35);
+}
+
+/* hover */
+#backBtn:hover{
+  transform:scale(1.06);
+  box-shadow:0 10px 26px rgba(255,92,138,.5);
+}
+
+/* HOVER EFFECT */
+button:hover{
+  transform:scale(1.08);
+  box-shadow:0 12px 28px rgba(255,92,138,.45);
+}
+
+/* ACTIVE / CLICK */
+button:active{
+  transform:scale(0.96);
+}
+
+/* DISABLED / FADED NO */
+#noBtn[style*="opacity: 0"]{
+  box-shadow:none;
+}
+
+
+button:hover{
+  transform:scale(1.08);
+}
+
+/* hearts */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  font-size:24px;
+  animation:float 4s linear forwards;
+  pointer-events:none;
+}
+@keyframes float{
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+}
+
+/* confetti */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  animation:confetti 3s linear forwards;
+}
+@keyframes confetti{
+  to{
+    transform:translateY(120vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* PINK SCROLLBAR */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffe6f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff7aa2;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5c8a;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ff7aa2 #ffe6f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#ff9ab8, #ff5c8a);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+#yesBtn{
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.buttons{
+  position: relative;
+  z-index: 5;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE QUESTION -->
+<div class="page active" id="pageQ">
+
+  <div class="typing">Jesslyn is typing...</div>
+
+  <h1>Will you be my Valentine? 💖</h1>
+
+  <div id="changingText"></div>
+
+  <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3RmcDFsaXBiZXhxMXVxZGw0aG5tMWtjeDBpZzlwNHZnNGs0ZHVscCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/zZbf6UpZslp3nvFjIR/giphy.webp">
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="yesClick()">Yes, of course 💕</button>
+    <button id="noBtn" onclick="noClick()">No 😐</button>
+  </div>
+
+  <audio id="music" loop>
+    <source src="The 1975 - About You (Official) - The1975VEVO.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<!-- PAGE YES -->
+<div class="page" id="pageYes">
+  <h1>YEYYY 💖</h1>
+  <p>I knew it you’ll say yes 😌💕</p>
+
+  <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bjV3b3c0ZjZoOXRrNmhzZHN5NWlxcXAxOWtkejhhMHFibWM5Z3dpYSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/hxERQNWQudqSF1iDnr/giphy.webp">
+  <a href="index.html">
+    <button>Ulang ➜</button>
+  </a>
+</div>
+
+<script>
+/* PAGE CONTROL */
+function showPage(id){
+  document.querySelectorAll('.page')
+    .forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* TEXT ROTATE */
+const texts=[
+  "Jawabb ihh lamaaa 😳",
+  "Please jangan pilih NO ya 🥺",
+  "Aku udah senyum duluan nih 💖",
+  "Udahh jawab yes aja susah bgtt 😌"
+];
+let t=0;
+setInterval(()=>{
+  document.getElementById("changingText").textContent=texts[t];
+  t=(t+1)%texts.length;
+},3000);
+
+/* MUSIC */
+let musicPlayed=false;
+function playMusic(){
+  if(musicPlayed) return;
+  const m=document.getElementById("music");
+  m.currentTime=45;
+  m.volume=0;
+  m.play().catch(()=>{});
+  let v=0;
+  const fade=setInterval(()=>{
+    v+=0.02;
+    m.volume=Math.min(v,0.25);
+    if(v>=0.25) clearInterval(fade);
+  },150);
+  musicPlayed=true;
+}
+
+/* NO BUTTON – KABUR AGRESIF */
+let noCount = 0;
+let yesScale = 1;
+
+function noClick(){
+  noCount++;
+
+  /* YES makin gede */
+yesScale = Math.min(yesScale + 0.25, 2.5);
+  document.getElementById("yesBtn").style.transform =
+    `scale(${yesScale})`;
+
+  const noBtn = document.getElementById("noBtn");
+
+  /* KABUR JAUH */
+  const x = (Math.random() * 600 - 300);
+  const y = (Math.random() * 400 - 200);
+  const r = (Math.random() * 40 - 20);
+
+  noBtn.style.transform =
+    `translate(${x}px, ${y}px) rotate(${r}deg)`;
+
+  noBtn.style.transition = "0.2s ease-out";
+  const panicTexts = ["EH 😭","JANGAN 😖","KOK MALAH NO SIH 🥲","GA BOLEH 😭", "DIHH YAUDAA AKU PERGI AJA WLEE😝"];
+noBtn.textContent = panicTexts[noCount % panicTexts.length];
+
+
+  spawnHeart();
+
+  /* 5x klik = NO HILANG */
+  if(noCount >= 5){
+    noBtn.style.opacity = 0;
+    noBtn.style.pointerEvents = "none";
+  }
+}
+
+/* BACK */
+function restart(){
+  location.reload();
+}
+
+/* EFFECTS */
+function spawnHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+}
+
+function spawnConfetti(){
+  const c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.background=["#ff7aa2","#ffd1dc","#ffc0cb"][Math.floor(Math.random()*3)];
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),3000);
+}
+
+
+function yesClick(){
+  playMusic();
+  showPage("pageYes");
+
+  // efek lucu
+  for(let i=0;i<25;i++){
+    setTimeout(spawnConfetti, i*80);
+    setTimeout(spawnHeart, i*120);
+  }
+
+  // buka WhatsApp di TAB BARU
+  setTimeout(()=>{
+    window.open(
+      "https://wa.me/6285245145953?text=AKU%20JAWAB%20YES%20YA%20💖%20HAPPY%20VALENTINEEE",
+      "_blank"
+    );
+  }, 1000);
+}
+
+
+</script>
+
+</body>
+</html>

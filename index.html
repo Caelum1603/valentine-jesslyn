@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Your Eyes Only 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Comic Sans MS','Poppins',cursive;
+  background:linear-gradient(to right,#fff,#ffd6e8);
+}
+
+/* SCREEN SYSTEM */
+.screen{
+  display:none;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+}
+.screen.active{display:flex;}
+
+.container{
+  width:90%;
+  max-width:900px;
+  height:500px;
+  display:flex;
+  border-radius:25px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(255,92,138,.35);
+}
+
+/* LEFT */
+.left{
+  flex:1;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+  text-align:center;
+}
+.left img{width:160px;}
+.left h1{color:#ff5c8a;}
+.left p{color:#555;}
+
+/* RIGHT */
+.right{
+  flex:1;
+  background:#f6b1c8;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+/* PIN DOTS */
+.pin-dots{
+  display:flex;
+  gap:14px;
+  margin-bottom:25px;
+}
+.dot{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  border:2px solid #fff;
+}
+.dot.filled{background:#ff5c8a;}
+
+/* KEYPAD */
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,70px);
+  gap:15px;
+}
+.keypad button{
+  width:70px;
+  height:70px;
+  border:none;
+  border-radius:50%;
+  font-size:20px;
+  background:#fff;
+  color:#ff5c8a;
+  cursor:pointer;
+}
+.keypad button:active{transform:scale(.9);}
+
+/* WRONG PAGE */
+.wrong-box{
+  background:#fff;
+  padding:40px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 15px 30px rgba(255,92,138,.3);
+}
+.wrong-box img{width:150px;}
+.wrong-box h2{color:#ff5c8a;}
+.wrong-box button{
+  margin-top:20px;
+  padding:10px 24px;
+  border:none;
+  border-radius:20px;
+  background:#ff7aa2;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+.wrong-box button:hover{background:#ff5c8a;}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="screen active" id="loginScreen">
+  <div class="container">
+    <div class="left">
+      <img src="https://media3.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3azd0ZDhhZWFoOXNrNzRmMzJxZmtha25tbmVzM3JyOTluYzRyd2k3dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/N2TSNvva60GcPC4nU0/giphy.webp">
+      <h1>For Jesslyn</h1>
+      <p>Enter our secret PIN 💕</p>
+      <p>Hint= Kapan chat pertama ta di wa 💕</p>
+      <p>Kalo masi nda tau, chat aja minta hint tapi ga gratis😋</p>
+    </div>
+
+    <div class="right">
+      <div class="pin-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <div class="keypad">
+        <button onclick="press(1)">1</button>
+        <button onclick="press(2)">2</button>
+        <button onclick="press(3)">3</button>
+        <button onclick="press(4)">4</button>
+        <button onclick="press(5)">5</button>
+        <button onclick="press(6)">6</button>
+        <button onclick="press(7)">7</button>
+        <button onclick="press(8)">8</button>
+        <button onclick="press(9)">9</button>
+        <button onclick="clearPin()">⌫</button>
+        <button onclick="press(0)">0</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WRONG SCREEN -->
+<div class="screen" id="wrongScreen">
+  <div class="wrong-box">
+    <img src="https://media4.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MjU4ZWZ1azZtODF0ZjljMGI4c2pqczNyMWRrajNibnp4c2QxZWh3eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/50dsL7TuCbvAVoDoOy/giphy.webp">
+    <h2>Wrong password 😢</h2>
+    <p>You sure you're Jesslyn??</p>
+    <button onclick="resetLogin()">Try Again</button>
+  </div>
+</div>
+
+<script>
+const CORRECT_PIN = "120924"; // GANTI PIN DI SINI 💖
+let input = "";
+
+function press(num){
+  if(input.length >= 6) return;
+  input += num;
+  updateDots();
+  if(input.length === 6){
+    setTimeout(checkPin,300);
+  }
+}
+
+function updateDots(){
+  document.querySelectorAll(".dot").forEach((dot,i)=>{
+    dot.classList.toggle("filled", i < input.length);
+  });
+}
+
+function clearPin(){
+  input = "";
+  updateDots();
+}
+
+function checkPin(){
+  if(input === CORRECT_PIN){
+    window.location.href = "main.html"; // WEB VALENTINE KAMU
+  }else{
+    document.getElementById("loginScreen").classList.remove("active");
+    document.getElementById("wrongScreen").classList.add("active");
+  }
+}
+
+function resetLogin(){
+  input = "";
+  updateDots();
+  document.getElementById("wrongScreen").classList.remove("active");
+  document.getElementById("loginScreen").classList.add("active");
+}
+</script>
+
+</body>
+</html>
