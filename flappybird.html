@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sunny Pink LoveBird 💕</title>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+}
+
+canvas{
+  display:block;
+}
+
+#winBox{
+  position:absolute;
+  top:40%;
+  width:100%;
+  text-align:center;
+  font-size:30px;
+  font-weight:bold;
+  color:deeppink;
+  display:none;
+}
+
+#nextBtn{
+  margin-top:20px;
+  padding:12px 25px;
+  font-size:18px;
+  background:hotpink;
+  border:none;
+  border-radius:12px;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="game"></canvas>
+
+<div id="winBox">
+ Ihh jago banget kamu 💖<br>
+  Saya aja score 2 kesusahan xixixi<br>
+  <button id="nextBtn">Yaudaa yukk lanjut 💌</button>
+</div>
+
+<audio id="flapSound" src="jump.wav"></audio>
+<audio id="scoreSound" src="score.wav"></audio>
+<audio id="hitSound" src="mati.wav"></audio>
+<audio id="bgm" src="bgm.mp3" loop></audio>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const birdImg = new Image();
+birdImg.src = "images/lovebird.png";
+
+const flapSound = document.getElementById("flapSound");
+const scoreSound = document.getElementById("scoreSound");
+const hitSound = document.getElementById("hitSound");
+const bgm = document.getElementById("bgm");
+
+let bird, pipes, clouds, score, frame, gameOver;
+
+function init(){
+  bird = {
+    x: 150,
+    y: canvas.height/2,
+    width: 70,
+    height: 70,
+    gravity: 0.6,
+    lift: -11,
+    velocity: 0
+  };
+
+  pipes = [];
+  clouds = [];
+  score = 0;
+  frame = 0;
+  gameOver = false;
+}
+
+function spawnPipe(){
+  let gap = 180;
+  let topHeight = Math.random() * (canvas.height - gap - 200) + 100;
+
+  pipes.push({
+    x: canvas.width,
+    top: topHeight,
+    bottom: topHeight + gap,
+    width: 80,
+    passed:false
+  });
+}
+
+function spawnCloud(){
+  clouds.push({
+    x: canvas.width,
+    y: Math.random()*200,
+    size: Math.random()*40+20
+  });
+}
+
+function drawBackground(){
+  let gradient = ctx.createLinearGradient(0,0,0,canvas.height);
+  gradient.addColorStop(0,"#87CEFA");
+  gradient.addColorStop(1,"#ffc0cb");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle="rgba(255,105,180,0.15)";
+  for(let i=0;i<8;i++){
+    ctx.beginPath();
+    ctx.arc((i*200+frame*0.5)%canvas.width, canvas.height-80, 30,0,Math.PI*2);
+    ctx.fill();
+  }
+}
+
+function update(){
+  if(gameOver) return;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawBackground();
+
+  if(Math.random()<0.01) spawnCloud();
+
+  clouds.forEach((c,i)=>{
+    c.x -= 1;
+    ctx.fillStyle="white";
+    ctx.beginPath();
+    ctx.arc(c.x,c.y,c.size,0,Math.PI*2);
+    ctx.fill();
+    if(c.x<0) clouds.splice(i,1);
+  });
+
+  bird.velocity += bird.gravity;
+  bird.y += bird.velocity;
+
+  if(bird.y+bird.height>canvas.height || bird.y<0){
+    crash();
+  }
+
+  ctx.drawImage(birdImg,bird.x,bird.y,bird.width,bird.height);
+
+  if(frame%100===0) spawnPipe();
+
+  pipes.forEach((p,i)=>{
+    p.x -= 4;
+
+    ctx.fillStyle="#ff69b4";
+    ctx.fillRect(p.x,0,p.width,p.top);
+    ctx.fillRect(p.x,p.bottom,p.width,canvas.height-p.bottom);
+
+    if(
+      bird.x < p.x+p.width &&
+      bird.x+bird.width > p.x &&
+      (bird.y < p.top || bird.y+bird.height > p.bottom)
+    ){
+      crash();
+    }
+
+    if(!p.passed && p.x+p.width < bird.x){
+      p.passed=true;
+      score++;
+      scoreSound.play();
+    }
+
+    if(p.x+p.width<0) pipes.splice(i,1);
+  });
+
+  ctx.fillStyle="deeppink";
+  ctx.font="28px Arial";
+  ctx.fillText("Score: "+score+" / 1",30,50);
+
+  if(score>=1){
+    win();
+  }
+
+  frame++;
+  requestAnimationFrame(update);
+}
+
+function flap(){
+  bird.velocity = bird.lift;
+  flapSound.play();
+}
+
+function crash(){
+  hitSound.play();
+  init();
+}
+
+function win(){
+  gameOver=true;
+  bgm.pause();
+  document.getElementById("winBox").style.display="block";
+}
+
+document.addEventListener("click",()=>{
+  flap();
+  bgm.play();
+});
+
+document.addEventListener("keydown",()=>{
+  flap();
+  bgm.play();
+});
+
+document.getElementById("nextBtn").onclick=()=>{
+  window.location.href="main.html";
+};
+
+birdImg.onload=()=>{
+  init();
+  update();
+};
+</script>
+
+</body>
+</html>
